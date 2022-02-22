@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ou3-4X-Bqe">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="142" width="414" height="720"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="s6r-jo-RxM" detailTextLabel="FFt-gf-c20" style="IBUITableViewCellStyleSubtitle" id="79Q-z4-qDt">
@@ -46,17 +46,26 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="カテゴリで検索" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dJ5-hS-s7J">
+                                <rect key="frame" x="10" y="98" width="394" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ou3-4X-Bqe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ATr-3M-hWD"/>
                             <constraint firstItem="ou3-4X-Bqe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DHf-W0-eQ9"/>
+                            <constraint firstItem="dJ5-hS-s7J" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="PqS-QS-QgS"/>
+                            <constraint firstItem="dJ5-hS-s7J" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Rz8-N4-FLx"/>
+                            <constraint firstItem="ou3-4X-Bqe" firstAttribute="top" secondItem="dJ5-hS-s7J" secondAttribute="bottom" constant="10" id="Xlv-SE-ojR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dJ5-hS-s7J" secondAttribute="trailing" constant="10" id="h6y-2n-frk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ou3-4X-Bqe" secondAttribute="trailing" id="jx5-j7-0mF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ou3-4X-Bqe" secondAttribute="bottom" id="sl9-Wc-yhL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="U39-rD-EzV">
+                        <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="CW7-C1-eqZ">
                             <connections>
                                 <segue destination="VC8-sS-zRX" kind="show" id="nxu-yA-nzk"/>
@@ -64,6 +73,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchTextField" destination="dJ5-hS-s7J" id="1mK-lJ-T0o"/>
                         <outlet property="tableView" destination="ou3-4X-Bqe" id="TQV-MB-tII"/>
                         <segue destination="VC8-sS-zRX" kind="show" identifier="cellSegue" id="7ju-tA-gY2"/>
                     </connections>
@@ -92,7 +102,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="C43-9M-QUN">
-                                <rect key="frame" x="10" y="204" width="394" height="120"/>
+                                <rect key="frame" x="10" y="279" width="394" height="120"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="CgC-pV-jpn"/>
@@ -103,40 +113,58 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="PSE-CO-S21">
-                                <rect key="frame" x="0.0" y="334" width="414" height="120"/>
+                                <rect key="frame" x="0.0" y="409" width="414" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="JyL-Eb-UBD"/>
                                 </constraints>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRP-vQ-g3L">
+                                <rect key="frame" x="10" y="248" width="394" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カテゴリ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ir2-Ky-b4I">
                                 <rect key="frame" x="10" y="173" width="394" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IkJ-Bm-Mtp">
+                                <rect key="frame" x="10" y="204" width="394" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dvj-Ke-g32"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="33k-Sf-l5v" firstAttribute="top" secondItem="epO-wP-7JJ" secondAttribute="bottom" constant="10" id="53g-0g-VPi"/>
                             <constraint firstItem="epO-wP-7JJ" firstAttribute="leading" secondItem="dvj-Ke-g32" secondAttribute="leading" constant="10" id="5xQ-V5-fgt"/>
+                            <constraint firstItem="IkJ-Bm-Mtp" firstAttribute="leading" secondItem="dvj-Ke-g32" secondAttribute="leading" constant="10" id="9x8-p2-8v9"/>
                             <constraint firstItem="33k-Sf-l5v" firstAttribute="leading" secondItem="dvj-Ke-g32" secondAttribute="leading" constant="10" id="BCD-gV-D0c"/>
                             <constraint firstItem="PSE-CO-S21" firstAttribute="top" secondItem="C43-9M-QUN" secondAttribute="bottom" constant="10" id="BzD-P3-q0B"/>
-                            <constraint firstItem="TRP-vQ-g3L" firstAttribute="top" secondItem="33k-Sf-l5v" secondAttribute="bottom" constant="10" id="D1m-6C-Bz4"/>
+                            <constraint firstItem="dvj-Ke-g32" firstAttribute="trailing" secondItem="IkJ-Bm-Mtp" secondAttribute="trailing" constant="10" id="E6u-AZ-ub4"/>
                             <constraint firstItem="PSE-CO-S21" firstAttribute="leading" secondItem="dvj-Ke-g32" secondAttribute="leading" id="JLK-uB-ir0"/>
                             <constraint firstItem="dvj-Ke-g32" firstAttribute="trailing" secondItem="33k-Sf-l5v" secondAttribute="trailing" constant="10" id="N5o-DO-WFw"/>
                             <constraint firstAttribute="trailing" secondItem="PSE-CO-S21" secondAttribute="trailing" id="RTV-AI-CQX"/>
+                            <constraint firstItem="TRP-vQ-g3L" firstAttribute="top" secondItem="IkJ-Bm-Mtp" secondAttribute="bottom" constant="10" id="RfU-by-p3c"/>
                             <constraint firstItem="dvj-Ke-g32" firstAttribute="trailing" secondItem="TRP-vQ-g3L" secondAttribute="trailing" constant="10" id="Tfe-xp-txK"/>
                             <constraint firstItem="C43-9M-QUN" firstAttribute="leading" secondItem="dvj-Ke-g32" secondAttribute="leading" constant="10" id="WLF-K2-z5i"/>
                             <constraint firstItem="C43-9M-QUN" firstAttribute="top" secondItem="TRP-vQ-g3L" secondAttribute="bottom" constant="10" id="Wza-q0-gBo"/>
                             <constraint firstItem="dvj-Ke-g32" firstAttribute="trailing" secondItem="epO-wP-7JJ" secondAttribute="trailing" constant="10" id="YOR-gz-dti"/>
+                            <constraint firstItem="ir2-Ky-b4I" firstAttribute="leading" secondItem="dvj-Ke-g32" secondAttribute="leading" constant="10" id="ffk-3c-KWC"/>
+                            <constraint firstItem="dvj-Ke-g32" firstAttribute="trailing" secondItem="ir2-Ky-b4I" secondAttribute="trailing" constant="10" id="gCa-dT-Sm1"/>
                             <constraint firstItem="TRP-vQ-g3L" firstAttribute="leading" secondItem="dvj-Ke-g32" secondAttribute="leading" constant="10" id="jui-hW-ZyT"/>
+                            <constraint firstItem="ir2-Ky-b4I" firstAttribute="top" secondItem="33k-Sf-l5v" secondAttribute="bottom" constant="10" id="p55-Vo-Cz9"/>
+                            <constraint firstItem="IkJ-Bm-Mtp" firstAttribute="top" secondItem="ir2-Ky-b4I" secondAttribute="bottom" constant="10" id="q5J-SN-qmp"/>
                             <constraint firstItem="epO-wP-7JJ" firstAttribute="top" secondItem="dvj-Ke-g32" secondAttribute="top" constant="10" id="spW-dY-T8w"/>
                             <constraint firstItem="dvj-Ke-g32" firstAttribute="trailing" secondItem="C43-9M-QUN" secondAttribute="trailing" constant="10" id="sqL-KF-t6S"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zkC-n6-fUi"/>
                     <connections>
+                        <outlet property="categoryTextField" destination="IkJ-Bm-Mtp" id="rGt-p7-jbR"/>
                         <outlet property="contentsTextView" destination="C43-9M-QUN" id="35K-xh-xcs"/>
                         <outlet property="datePicker" destination="PSE-CO-S21" id="3WC-ch-mzc"/>
                         <outlet property="titleTextField" destination="33k-Sf-l5v" id="diJ-P6-chb"/>

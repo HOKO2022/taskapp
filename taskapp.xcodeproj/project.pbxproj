@@ -15,6 +15,7 @@
 		E90178C727C3BDA50069FA97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E90178C627C3BDA50069FA97 /* Assets.xcassets */; };
 		E90178CA27C3BDA50069FA97 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E90178C827C3BDA50069FA97 /* LaunchScreen.storyboard */; };
 		E90178D227C3CAC00069FA97 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90178D127C3CAC00069FA97 /* InputViewController.swift */; };
+		E90178D427C3DEEF0069FA97 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90178D327C3DEEF0069FA97 /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		E90178C927C3BDA50069FA97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E90178CB27C3BDA50069FA97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E90178D127C3CAC00069FA97 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		E90178D327C3DEEF0069FA97 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +52,6 @@
 				AD733D05DB19B274B56169FF /* Pods-taskapp.debug.xcconfig */,
 				D84DC282AF9123F8A1E31C98 /* Pods-taskapp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -87,6 +88,7 @@
 				E90178BF27C3BDA40069FA97 /* SceneDelegate.swift */,
 				E90178C127C3BDA40069FA97 /* ViewController.swift */,
 				E90178D127C3CAC00069FA97 /* InputViewController.swift */,
+				E90178D327C3DEEF0069FA97 /* Task.swift */,
 				E90178C327C3BDA40069FA97 /* Main.storyboard */,
 				E90178C627C3BDA50069FA97 /* Assets.xcassets */,
 				E90178C827C3BDA50069FA97 /* LaunchScreen.storyboard */,
@@ -212,6 +214,7 @@
 			files = (
 				E90178C227C3BDA40069FA97 /* ViewController.swift in Sources */,
 				E90178BE27C3BDA40069FA97 /* AppDelegate.swift in Sources */,
+				E90178D427C3DEEF0069FA97 /* Task.swift in Sources */,
 				E90178C027C3BDA40069FA97 /* SceneDelegate.swift in Sources */,
 				E90178D227C3CAC00069FA97 /* InputViewController.swift in Sources */,
 			);
