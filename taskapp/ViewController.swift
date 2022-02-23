@@ -9,10 +9,10 @@ import UIKit
 import RealmSwift
 import UserNotifications
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchTextField: UITextField!
     
     // Realmインスタンスを取得する
     let realm = try! Realm()
@@ -21,28 +21,57 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // 日付の近い順でソート：昇順
     // 以降内容をアップデートするとリスト内は自動的に更新される。
     var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
+    var categoryArray = try! Realm().objects(Category.self).sorted(byKeyPath: "id", ascending: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.fillerRowHeight = UITableView.automaticDimension
+        pickerView.delegate = self
+        pickerView.dataSource = self
         tableView.delegate = self
         tableView.dataSource = self
         
-        searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        let category = Category()
+        try! realm.write {
+            category.id = 0
+            category.name = "(カテゴリなし)"
+            self.realm.add(category, update: .modified)
+        }
     }
     
     // 入力画面から戻ってきた時に TableView を更新させる
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        pickerView.reloadAllComponents()
         tableView.reloadData()
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        if(searchTextField.text == ""){
+    // UIPickerViewの列の数
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+     
+    // UIPickerViewの行数、要素の全数
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return categoryArray.count
+    }
+     
+    // UIPickerViewに表示する配列
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if(row == 0){
+            return "全てのカテゴリ"
+        } else {
+            return categoryArray[row].name
+        }
+    }
+     
+    // UIPickerViewのRowが選択された時の挙動
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if(categoryArray[row].id == 0){
             taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
         } else {
-            taskArray = try! Realm().objects(Task.self).filter("category == %@", searchTextField.text as Any).sorted(byKeyPath: "date", ascending: true)
+            taskArray = try! Realm().objects(Task.self).filter("category == %@", categoryArray[row].id as Any).sorted(byKeyPath: "date", ascending: true)
         }
         tableView.reloadData()
     }
