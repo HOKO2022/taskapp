@@ -27,30 +27,47 @@ class CategoryViewController: UIViewController {
         categoryTextField.text = ""
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    /*override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }*/
+    
+    @IBAction func enter(_ sender: Any) {
         category = Category()
-
         let allCategory = realm.objects(Category.self)
         if allCategory.count != 0 {
             category.id = allCategory.max(ofProperty: "id")! + 1
         }
-    }
-    
-    @IBAction func enter(_ sender: Any) {
+        
         var singleCategory = true //同じ名前のカテゴリであるかを判定
         for category in categoryArray{
             if(category.name == self.categoryTextField.text){
                 singleCategory = false
             }
         }
-        if(self.categoryTextField.text != "" && singleCategory){
+        if(self.categoryTextField.text == ""){
+            showAlert(titleText: "カテゴリの登録に失敗しました",
+                      messageText:"カテゴリ名を入力してください。")
+        } else if(singleCategory) {
             try! realm.write {
                 self.category.name = self.categoryTextField.text!
                 self.realm.add(self.category, update: .modified)
             }
+            showAlert(titleText: "カテゴリの登録に成功しました",
+                      messageText:"カテゴリ「" + self.categoryTextField.text! + "」を登録しました。")
             self.categoryTextField.text = ""
+        } else {
+            showAlert(titleText: "カテゴリの登録に失敗しました",
+                      messageText:"カテゴリ「" + self.categoryTextField.text! + "」は既に存在しています。")
         }
+    }
+    
+    private func showAlert(titleText title: String, messageText message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
     }
     
     @objc func dismissKeyboard(){
